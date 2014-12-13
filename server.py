@@ -24,6 +24,17 @@ app = web.auto_application()
 render = web.template.render('templates/')
 
 
+def pulse(duration):
+  io.digitalWrite(pins[pin], io.LOW)
+  time.sleep(duration)
+  io.digitalWrite(pins[pin], io.HIGH)
+
+def pause(duration):
+  time.sleep(duration)
+
+
+
+
 ## Routes
 ######################################################
 class index(app.page):
@@ -40,16 +51,26 @@ class switch(app.page):
       pin   = int(i.pin)
       state = i.state
 
-      #if state == 'on':
-      io.digitalWrite(pins[pin], io.HIGH)
-      time.sleep(1)
-      #if state == 'off':
-      io.digitalWrite(pins[pin], io.LOW)
+      if state == 'on':
+        io.digitalWrite(pins[pin], io.LOW)
+      #time.sleep(1)
+      if state == 'off':
+        io.digitalWrite(pins[pin], io.HIGH)
 
       web.header('Content-Type', 'application/json')
 
       return json.dumps({"response" : "ok"})
 
+class test1(app.page):
+    path = "/test1"
+
+    def POST(self):
+      pulse(.5)
+      pulse(.5)
+
+      web.header('Content-Type', 'application/json')
+
+      return json.dumps({"response" : "ok"})
 
 ## Run
 ######################################################

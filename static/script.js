@@ -11,8 +11,14 @@ jQuery( document ).ready(function( $ ) {
         });
     });
 
-    $("#P23").on('click', function() {
+    $("#P23_on").on('click', function() {
         $.post("/switch", {"pin":23, "state":"on"}, function (data) {
+            console.log(data);
+        });
+    });
+
+    $("#P23_off").on('click', function() {
+        $.post("/switch", {"pin":23, "state":"off"}, function (data) {
             console.log(data);
         });
     });
