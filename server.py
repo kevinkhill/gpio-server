@@ -7,17 +7,9 @@ import time
 
 ## Setup
 ######################################################
-pins = {
-  17 : 0,
-  18 : 1,
-  23 : 4
-}
-
 io = wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
 
-io.pinMode(pins[17], io.OUTPUT)
-io.pinMode(pins[18], io.OUTPUT)
-io.pinMode(pins[23], io.OUTPUT)
+io.pinMode(4, io.OUTPUT)
 
 app = web.auto_application()
 
@@ -25,9 +17,9 @@ render = web.template.render('templates/')
 
 
 def pulse(duration):
-  io.digitalWrite(pins[pin], io.LOW)
+  io.digitalWrite(4, io.LOW)
   time.sleep(duration)
-  io.digitalWrite(pins[pin], io.HIGH)
+  io.digitalWrite(4, io.HIGH)
 
 def pause(duration):
   time.sleep(duration)
@@ -48,25 +40,33 @@ class switch(app.page):
     def POST(self):
       i = web.input()
 
-      pin   = int(i.pin)
       state = i.state
 
       if state == 'on':
-        io.digitalWrite(pins[pin], io.LOW)
-      #time.sleep(1)
+        io.digitalWrite(4, io.LOW)
+
       if state == 'off':
-        io.digitalWrite(pins[pin], io.HIGH)
+        io.digitalWrite(4, io.HIGH)
 
       web.header('Content-Type', 'application/json')
 
       return json.dumps({"response" : "ok"})
 
-class test1(app.page):
-    path = "/test1"
+class dance(app.page):
+    path = "/dance"
 
     def POST(self):
-      pulse(.5)
-      pulse(.5)
+      i = web.input()
+
+      d = float(i.time)
+
+      for x in range(0, 5):
+        pulse(d)
+        pause(d)
+        pulse(d)
+        pause(d)
+        pulse(d)
+        pause(1)
 
       web.header('Content-Type', 'application/json')
 
