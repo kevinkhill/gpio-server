@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Web GPIO</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/darkly/bootstrap.min.css" rel="stylesheet" />
+  <style type="text/css">
+    #wrap {
+      margin: 10px;
+    }
+  </style>
+  <!--<link rel="icon" type="image/png" href="static/images/favicon.png" />-->
+</head>
+
+<body>
+  <div id="wrap" class="container-fluid">
+    <h1>GPIO Controller <br /><small>Powered by Web.py</small></h1>
+    <div class="row">
+      <div class="col-sm-4 col-lg-2">
+        <button type="button" id="P17" class="btn btn-warning">Pin 17</button>
+      </div>
+      <div class="col-sm-4 col-lg-2">
+        <button type="button" id="P18" class="btn btn-success">Pin 18</button>
+      </div>
+      <div class="col-sm-4 col-lg-2">
+        <button type="button" id="P23" class="btn btn-danger">Pin 23</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/static/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/static/script.js"></script>
+</body>
+</html>
