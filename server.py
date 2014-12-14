@@ -5,6 +5,7 @@ import json
 import wiringpi2
 import time
 import mido
+import signal
 
 ## Setup
 ######################################################
@@ -24,8 +25,6 @@ def pulse(duration):
 
 def pause(duration):
   time.sleep(duration)
-
-
 
 
 ## Routes
@@ -86,5 +85,4 @@ class midi(app.page):
 
 ## Run
 ######################################################
-if __name__ == "__main__":
-  app.run()
+app.run()
