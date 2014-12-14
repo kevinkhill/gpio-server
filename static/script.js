@@ -7,7 +7,11 @@ jQuery( document ).ready(function( $ ) {
         $.post("/switch", {"state":"off"});
     });
 
-    $("#dance").on('click', function() {
-        $.post("/dance", {"time":".05"});
+    $("#flicker").on('click', function() {
+        $.post("/flicker", {"time":".05"});
+    });
+
+    $("#midi").on('click', function() {
+        $.post("/midi", {"filename":"for_whom_the_bell_tolls.mid"});
     });
 });
