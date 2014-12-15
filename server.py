@@ -70,11 +70,20 @@ class midi(app.page):
   path = "/midi"
 
   def POST(self):
+    global playing
+
+    playing = True
+
     i = web.input()
+
+    pulse(.5)
+    io.digitalWrite(4, io.HIGH)
 
     mid = mido.MidiFile(i.filename)
 
     for msg in mid.play():
+      if playing is False:
+        break
       if msg.channel is 9:
         if hasattr(msg, 'velocity') is True:
           if msg.velocity is 100:
@@ -82,6 +91,14 @@ class midi(app.page):
           if msg.velocity is 0:
             io.digitalWrite(4, io.HIGH)
 
+
+class midiStop(app.page):
+  path = "/midiStop"
+
+  def POST(self):
+    global playing
+
+    playing = False
 
 ## Run
 ######################################################
